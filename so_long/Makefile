@@ -6,7 +6,10 @@ FLAGS = -Wall -Wextra -Werror -I./libraries/minilibx-linux -I./libraries/libft -
 SRC_DIR = ./src/
 
 SRCS = $(addprefix $(SRC_DIR),\
-							main.c)
+							so_long.c \
+							map.c \
+							game.c \
+							events)
 
 OBJS = ${SRCS:.c=.o}
 

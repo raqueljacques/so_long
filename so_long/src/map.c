@@ -5,7 +5,7 @@ static int check_valid_char(char c)
     return (c == '0' || c == '1' || c == 'C' || c == 'E' || c == 'P');
 }
 
-static void count_map_elements(t_game *game, char c)
+static void count_elements(t_game *game, char c)
 {
     if (c == 'C')
         game->collectibles++;
@@ -34,6 +34,31 @@ static void flood_fill(char **map, int x, int y, int *reachable_collectibles, in
     flood_fill(map, x, y - 1, reachable_collectibles, reachable_exit);
 }
 
+char **copy_map(char **map, int height) {
+    char **new_map = malloc(sizeof(char *) * (height + 1));
+    if (!new_map) {
+        perror("Error allocating memory for map copy");
+        exit(EXIT_FAILURE);
+    }
+
+    for (int i = 0; i < height; i++) {
+        new_map[i] = ft_strdup(map[i]);
+        if (!new_map[i]) {
+            perror("Error allocating memory for map row");
+            // Libera as linhas já alocadas antes de retornar
+            for (int j = 0; j < i; j++) {
+                free(new_map[j]);
+            }
+            free(new_map);
+            exit(EXIT_FAILURE);
+        }
+    }
+
+    // Marca o fim da matriz como NULL
+    new_map[height] = NULL;
+    return new_map;
+}
+
 
 void find_player_position(t_game *game) {
     int x;
@@ -57,6 +82,21 @@ void find_player_position(t_game *game) {
     exit(1); // Finaliza o programa caso o jogador não seja encontrado
 }
 
+void free_map(char **map, int height) {
+    int i;
+
+    i = 0;
+    if (!map)
+        return;
+
+    while (i < height)
+    {
+        if (map[i]) {
+            free(map[i]);
+        }
+    }
+    free(map);
+}
 
 
 int is_map_playable(t_game *game) {
@@ -85,8 +125,6 @@ int is_map_playable(t_game *game) {
 
 static int validate_map(t_game *game)
 {
-	//TODO: mapa deve ser retangular, deve estar cercado de paredes, mapa deve ser jogável 
-	//(usar Flood Fill para verificar se o player pode alcançar E passando por C)
     if (game->player_count != 1)
         return (printf("Error: Map must have exactly 1 player!\n"), 0);
     if (game->exit_count != 1)
@@ -103,7 +141,7 @@ void	define_width(t_game *game, int	line)
 {
 	int	len;
 	
-	int = ft_strlen(line);
+	len = ft_strlen(line);
 	//Se o último caractere for quebra de linha ele diminui 1 do tamanho da linha
 	if (line[len - 1] == '\n')
 		game->width = len - 1;

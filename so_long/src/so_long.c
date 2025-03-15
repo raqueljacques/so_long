@@ -15,6 +15,10 @@ int	main(int argc, char **argv)
         return (1);
     }
     init_game(&game);
+    render_map(&game);
+
+    //Registrar eventos
+    mlx_key_hook(game.win, handle_keypress, &game);
     mlx_loop(game.mlx);
     return (0);
 }
