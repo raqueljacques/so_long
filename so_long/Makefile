@@ -1,40 +1,39 @@
 NAME = solong
 
-#TODO: O que significa -I e -L?
-FLAGS = -Wall -Wextra -Werror -I./libraries/minilibx-linux -I./libraries/libft -L./libraries/minilibx-linux -L./libraries/libft -lmlx_Linux -lXext -lX11 -lm -lz
+FLAGS = -Wall -Wextra -Werror -I./includes -I./libraries/minilibx-linux -I./libraries/libft -L./libraries/minilibx-linux -L./libraries/libft -lmlx_Linux -lXext -lX11 -lm -lz
 
 SRC_DIR = ./src/
 
-SRCS = $(addprefix $(SRC_DIR),\
-							so_long.c \
-							map.c \
-							game.c \
-							events)
+SRCS = $(addprefix $(SRC_DIR), \
+    so_long.c \
+    map.c \
+    game.c \
+    events.c)
 
-OBJS = ${SRCS:.c=.o}
+OBJS = $(SRCS:.c=.o)
 
 CC = cc
 
-all: ${NAME}
+all: $(NAME)
 
-${NAME}:${OBJS}
-	@$(MAKE) -C ./libraries/libft  # Build the libft library
-	@$(MAKE) -C ./libraries/get_next_line  # Build the get next line library
-	@$(MAKE) -C ./libraries/minilibx-linux  # Build the MiniLibX library
-	@${CC} ${OBJS} ${FLAGS} ./libraries/libft/libft.a -o ${NAME}  # Compile and link the final binary
+$(NAME): $(OBJS)
+	@$(MAKE) -C ./libraries/libft
+	@$(MAKE) -C ./libraries/get_next_line
+	@$(MAKE) -C ./libraries/minilibx-linux
+	@$(CC) $(OBJS) $(FLAGS) ./libraries/libft/libft.a -o $(NAME)
 
 clean:
-	@${RM} ${OBJS}
+	@rm -f $(OBJS)
 
 fclean: clean
-	@${RM} ${NAME}
-	@$(MAKE) -C ./libraries/minilibx-linux fclean  # Clean MiniLibX
-	@$(MAKE) -C ./libraries/get_next_line fclean # Clean get next line
-	@$(MAKE) -C ./libraries/libft fclean  # Clean libft
+	@rm -f $(NAME)
+	@$(MAKE) -C ./libraries/minilibx-linux fclean
+	@$(MAKE) -C ./libraries/get_next_line fclean
+	@$(MAKE) -C ./libraries/libft fclean
 
 re: fclean all
 
 run: all
-	./${NAME}
+	./$(NAME)
 
 .PHONY: clean fclean re all run

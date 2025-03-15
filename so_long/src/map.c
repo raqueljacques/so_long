@@ -1,4 +1,4 @@
-
+#include "../includes/so_long.h"
 
 static int check_valid_char(char c)
 {
@@ -94,6 +94,7 @@ void free_map(char **map, int height) {
         if (map[i]) {
             free(map[i]);
         }
+        i++;
     }
     free(map);
 }
@@ -131,7 +132,7 @@ static int validate_map(t_game *game)
         return (printf("Error: Map must have exactly 1 exit!\n"), 0);
     if (game->collectibles < 1)
         return (printf("Error: Map must have at least 1 collectible!\n"), 0);
-	if (is_map_playable(game) != 1)
+	if (!is_map_playable(game))
 		return (printf("Error: Map needs to be playable!\n"), 0);
     return (1);
 }
@@ -178,7 +179,7 @@ char	**load_map(char *file, t_game *game)
 		game->map[game->height] = line;
 		while (i < game->width)
 		{
-			if (check_valid_char(line[i]))
+			if (!check_valid_char(line[i]))
 				return (ft_printf("Error: Map contains invalid characters.\n"), NULL)
 			count_elements(game, line[i]);
 			i++;

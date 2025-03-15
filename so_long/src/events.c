@@ -1,3 +1,5 @@
+#include "../includes/so_long.h"
+
 int handle_keypress(int keycode, t_game *game) {
     if (keycode == ESC) {
         mlx_destroy_window(game->mlx, game->win);
@@ -30,7 +32,7 @@ void move_player(t_game *game, int new_x, int new_y) {
     if (game->map[new_y][new_x] == 'E' && game->collectibles == 0) {
         printf("Congratulations! You won the game!\n");
 		// TODO: Dar free na matriz inteira
-		free_map(game->map)
+		free_map(game->map, game->height);
         mlx_destroy_window(game->mlx, game->win);
         exit(0);
     }
