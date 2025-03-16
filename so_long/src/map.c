@@ -15,26 +15,27 @@ static void count_elements(t_game *game, char c)
         game->player_count++;
 }
 
-static void flood_fill(char **map, int x, int y, int *reachable_collectibles, int *reachable_exit) {
-    if (x < 0 || y < 0 || x >= game->height || y >= game->width || map[x][y] == '1' || map[x][y] == 'V')
+static void flood_fill(char **map, t_game *game, int x, int y, int *reachable_collectibles, int *reachable_exit) {
+    if (x < 0 || y < 0 || x >= game->height || y >= game->width || map[y][x] == '1' || map[y][x] == 'V')
         return;
 
-    if (map[x][y] == 'C')
+    if (map[y][x] == 'C')
         (*reachable_collectibles)++;
-    if (map[x][y] == 'E')
+    if (map[y][x] == 'E')
         (*reachable_exit)++;
 
-    // Marca a célula como visitada com 'V' para evitar confusão com paredes
-    map[x][y] = 'V';
+    // Marca a célula como visitada com 'V' para evitar loops
+    map[y][x] = 'V';
 
     // Chama recursivamente para as 4 direções
-    flood_fill(map, x + 1, y, reachable_collectibles, reachable_exit);
-    flood_fill(map, x - 1, y, reachable_collectibles, reachable_exit);
-    flood_fill(map, x, y + 1, reachable_collectibles, reachable_exit);
-    flood_fill(map, x, y - 1, reachable_collectibles, reachable_exit);
+    flood_fill(map, game, x + 1, y, reachable_collectibles, reachable_exit);
+    flood_fill(map, game, x - 1, y, reachable_collectibles, reachable_exit);
+    flood_fill(map, game, x, y + 1, reachable_collectibles, reachable_exit);
+    flood_fill(map, game, x, y - 1, reachable_collectibles, reachable_exit);
 }
 
-char **copy_map(char **map, int height) {
+
+static char **copy_map(char **map, int height) {
     char **new_map = malloc(sizeof(char *) * (height + 1));
     if (!new_map) {
         perror("Error allocating memory for map copy");
@@ -60,7 +61,7 @@ char **copy_map(char **map, int height) {
 }
 
 
-void find_player_position(t_game *game) {
+static void find_player_position(t_game *game) {
     int x;
 	int y;
 
@@ -99,8 +100,7 @@ void free_map(char **map, int height) {
     free(map);
 }
 
-
-int is_map_playable(t_game *game) {
+static int is_map_playable(t_game *game) {
     int reachable_collectibles = 0;
     int reachable_exit = 0;
 
@@ -111,7 +111,8 @@ int is_map_playable(t_game *game) {
     char **temp_map = copy_map(game->map, game->height);
 
     // Começa o Flood Fill a partir da posição do jogador
-    flood_fill(temp_map, game->player_x, game->player_y, &reachable_collectibles, &reachable_exit);
+     flood_fill(temp_map, game, game->player_x, game->player_y, &reachable_collectibles, &reachable_exit);
+
 
     // Libera a memória da cópia do mapa
     free_map(temp_map, game->height);
@@ -138,11 +139,11 @@ static int validate_map(t_game *game)
 }
 
 
-void	define_width(t_game *game, int	line)
+static void	define_width(t_game *game, char *line)
 {
-	int	len;
-	
-	len = ft_strlen(line);
+	size_t  len;
+    
+    len = ft_strlen((const char *)line);
 	//Se o último caractere for quebra de linha ele diminui 1 do tamanho da linha
 	if (line[len - 1] == '\n')
 		game->width = len - 1;
@@ -180,7 +181,7 @@ char	**load_map(char *file, t_game *game)
 		while (i < game->width)
 		{
 			if (!check_valid_char(line[i]))
-				return (ft_printf("Error: Map contains invalid characters.\n"), NULL)
+				return (ft_printf("Error: Map contains invalid characters.\n"), NULL);
 			count_elements(game, line[i]);
 			i++;
 		}
