@@ -9,12 +9,15 @@ int	main(int argc, char **argv)
         ft_printf("Error: invalid number of arguments\n");
         return (1);
     }
-    if (!load_map(&game, argv[1]))
+    if (!load_map(argv[1], &game))
     {
         ft_printf("Error: invalid map\n");
         return (1);
     }
+    // Inicializa o jogo (carrega mapa, inicializa MiniLibX, etc.)
     init_game(&game);
+
+    // Renderiza o mapa na tela pela primeira vez
     render_map(&game);
 
     //Registrar eventos
