@@ -1,22 +1,7 @@
 #include "../includes/so_long.h"
 
-int handle_keypress(int keycode, t_game *game) {
-    if (keycode == ESC) {
-        mlx_destroy_window(game->mlx, game->win);
-        exit(0); // Fecha o jogo
-    } else if (keycode == KEY_W) {
-        move_player(game, game->player_x, game->player_y - 1); 
-    } else if (keycode == KEY_S) {
-        move_player(game, game->player_x, game->player_y + 1); 
-    } else if (keycode == KEY_A) {
-        move_player(game, game->player_x - 1, game->player_y);
-    } else if (keycode == KEY_D) {
-        move_player(game, game->player_x + 1, game->player_y);
-    }
-    return 0; // Retorna 0 para indicar que o evento foi tratado
-}
 
-void move_player(t_game *game, int new_x, int new_y) {
+static void move_player(t_game *game, int new_x, int new_y) {
     // Verificar se o movimento é para fora do mapa não faz sentido pq a borda estará preenchida
 
     // Verifica se o jogador está tentando atravessar uma parede
@@ -45,4 +30,20 @@ void move_player(t_game *game, int new_x, int new_y) {
 
     // Renderiza o mapa após o movimento
     render_map(game);
+}
+
+int handle_keypress(int keycode, t_game *game) {
+    if (keycode == ESC) {
+        mlx_destroy_window(game->mlx, game->win);
+        exit(0); // Fecha o jogo
+    } else if (keycode == KEY_W) {
+        move_player(game, game->player_x, game->player_y - 1); 
+    } else if (keycode == KEY_S) {
+        move_player(game, game->player_x, game->player_y + 1); 
+    } else if (keycode == KEY_A) {
+        move_player(game, game->player_x - 1, game->player_y);
+    } else if (keycode == KEY_D) {
+        move_player(game, game->player_x + 1, game->player_y);
+    }
+    return 0; // Retorna 0 para indicar que o evento foi tratado
 }
