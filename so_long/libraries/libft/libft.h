@@ -13,6 +13,11 @@
 #ifndef LIBFT_H
 # define LIBFT_H
 
+//TODO: Como vai ser definido o buffer size para usp na so long?
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdarg.h>
@@ -69,5 +74,9 @@ int	ft_putpointer(void *pointer);
 int	ft_putnbr_base(unsigned long number, const char ref, int base);
 int	ft_putnbr_u(unsigned int nb);
 int	ft_putnbr(int nb);
+
+//gnl
+
+char	*get_next_line(int fd);
 
 #endif
