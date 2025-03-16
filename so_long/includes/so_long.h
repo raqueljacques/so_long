@@ -3,7 +3,6 @@
 
 #include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
-# include "../libraries/get_next_line/get_next_line.h"
 
 #include <fcntl.h>  // Para open()
 #include <stdlib.h> // Para malloc(), free()
@@ -41,5 +40,10 @@ typedef struct s_game
 } t_game;
 
 char    **load_map(char *file, t_game *game);
+void    free_map(char **map, int height);
+void    init_game(t_game *game);
+void    render_map(t_game *game);
+int handle_keypress(int keycode, t_game *game);
+
 
 #endif
