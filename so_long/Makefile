@@ -8,6 +8,7 @@ SRCS = $(addprefix $(SRC_DIR), \
     so_long.c \
     map.c \
     game.c \
+	render.c \
     events.c)
 
 OBJS = $(SRCS:.c=.o)
@@ -18,7 +19,6 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	@$(MAKE) -C ./libraries/libft
-	@$(MAKE) -C ./libraries/get_next_line
 	@$(MAKE) -C ./libraries/minilibx-linux
 	@$(CC) $(OBJS) $(FLAGS) ./libraries/libft/libft.a -o $(NAME)
 
@@ -27,9 +27,8 @@ clean:
 
 fclean: clean
 	@rm -f $(NAME)
-	@$(MAKE) -C ./libraries/minilibx-linux fclean
-	@$(MAKE) -C ./libraries/get_next_line fclean
 	@$(MAKE) -C ./libraries/libft fclean
+	@$(MAKE) -C ./libraries/minilibx-linux fclean
 
 re: fclean all
 
