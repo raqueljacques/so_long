@@ -14,9 +14,6 @@
 
 static int	check_next(va_list args, const char *s)
 {
-	int	c;
-
-	c = 0;
 	if (*s == 'c')
 		return (ft_putchar(va_arg(args, int)));
 	else if (*s == 's')
