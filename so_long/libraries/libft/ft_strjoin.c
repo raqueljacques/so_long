@@ -32,5 +32,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (*s2)
 		str[i++] = *s2++;
 	str[i] = '\0';
+	//TODO: VER SE FAZ SENTIDO DAR FREE NO S1 COMO ESTAVA NA GNL ORIGINAL OU TRATAR DIRETO NELA
 	return (str);
 }
