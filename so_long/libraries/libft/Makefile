@@ -41,6 +41,7 @@ SRCS=ft_bzero.c \
      ft_putpointer.c\
      ft_putnbr_base.c\
      ft_putnbr_u.c\
+     get_next_line.c\
      ft_putnbr.c\
 
 OBJS = $(SRCS:.c=.o)
