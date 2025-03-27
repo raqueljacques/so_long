@@ -25,7 +25,6 @@ static void move_player(t_game *game, int new_x, int new_y) {
     {
         return;
     }
-
     // Atualiza a posição do jogador no mapa
     game->map[game->player_y][game->player_x] = '0'; //Coloca o chão na posição antiga
     game->map[new_y][new_x] = 'P'; // Atualiza a posição do jogador
@@ -50,4 +49,11 @@ int handle_keypress(int keycode, t_game *game) {
         move_player(game, game->player_x + 1, game->player_y);
     }
     return 0; // Retorna 0 para indicar que o evento foi tratado
+}
+
+int	handle_exit(t_game *game)
+{
+	mlx_destroy_window(game->mlx, game->win);
+	exit(0);
+	return (0);
 }
