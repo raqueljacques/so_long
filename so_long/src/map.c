@@ -162,50 +162,6 @@ static void	define_width(t_game *game, char *line)
 		game->width = len;
 	return;
 }
-/*
-//Recebe como parâmetro o mapa e a struct que vai receber as informações
-char	**load_map(char *file, t_game *game)
-{
-	int	fd = open(file, O_RDONLY);
-	if (fd < 0)
-		return (perror("Error opening the file"), NULL);
-	
-	char	*line;
-	game->height = 0;
-	game->width = 0;
-	game->collectibles = 0;
-	game->exit_count = 0;
-	game->player_count = 0;
-
-    ft_printf("chegou aqui");
-	while((line = get_next_line(fd)))
-	{
-		int	i;
-		i = 0;
-	
-		if (!game->width)
-			define_width(game, line);
-
-		game->map = realloc(game->map, sizeof(char *) * (game->height + 2));
-		game->map[game->height] = line;
-		while (i < game->width)
-		{       
-			if (!check_valid_char(line[i]))
-				return (ft_printf("Error: Map contains invalid characters.\n"), NULL);
-			count_elements(game, line[i]);
-			i++;
-		}
-		game->height++;
-	}
-    ft_printf("opa");
-	game->map[game->height] = NULL;
-	close(fd);
-
-	if (validate_map(game))
-		return game->map;
-	else
-		return NULL;
-}*/
 
 char	**load_map(char *file, t_game *game)
 {
