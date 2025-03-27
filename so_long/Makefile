@@ -9,7 +9,7 @@ SRCS = $(addprefix $(SRC_DIR), \
     map.c \
     game.c \
 	render.c \
-	validate.c \
+	utils.c \
     events.c)
 
 OBJS = $(SRCS:.c=.o)
@@ -29,7 +29,7 @@ clean:
 fclean: clean
 	@rm -f $(NAME)
 	@$(MAKE) -C ./libraries/libft fclean
-	@$(MAKE) -C ./libraries/minilibx-linux fclean
+	@$(MAKE) -C ./libraries/minilibx-linux clean
 
 re: fclean all
 
