@@ -19,26 +19,26 @@ int validate_map(t_game *game)
 {
     if (game->player_count != 1)
     {
-        destroy_all(game);
         perror("Error: Map must have exactly 1 player!\n");
+        destroy_all(game);
         return(0);
     }
     if (game->exit_count != 1)
     {
-        destroy_all(game);
         perror("Error: Map must have exactly 1 exit!\n");
+        destroy_all(game);
         return(0);
     }
     if (game->collectibles < 1)
     {
-        destroy_all(game);
         perror("Error: Map must have at least 1 collectible!\n");
+        destroy_all(game);
         return(0);
     }
-	if (!is_map_playable(game))
+	if (!is_map_playable(game) || !has_border_filled(game))
     {
-        destroy_all(game);
         perror("Error: Map needs to be playable!\n");
+        destroy_all(game);
 		return(0);
     }
     return (1);
