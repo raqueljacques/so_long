@@ -2,7 +2,6 @@
 
 void render_map(t_game *game) {
     int x, y;
-
     // Limpa a janela antes de redesenhar
     mlx_clear_window(game->mlx, game->win);
 

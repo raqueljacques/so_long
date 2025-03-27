@@ -6,9 +6,9 @@ static void move_player(t_game *game, int new_x, int new_y) {
 
     // Verifica se o jogador está tentando atravessar uma parede
     if (game->map[new_y][new_x] == '1')
-{
+    {
         return;
-}
+    }
     // Se pisar em um coletável, decrementa o contador
     if (game->map[new_y][new_x] == 'C') {
         game->collectibles--;
