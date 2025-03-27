@@ -9,6 +9,7 @@
 #include <unistd.h> // Para close(), read()
 #include <stdio.h>  // Para perror()
 
+# define CLOSE_WINDOW 17
 # define ESC	65307
 # define KEY_W	119
 # define KEY_A	97
@@ -44,6 +45,6 @@ void    free_map(char **map, int height);
 void    init_game(t_game *game);
 void    render_map(t_game *game);
 int handle_keypress(int keycode, t_game *game);
-
+int handle_exit(t_game *game);
 
 #endif
