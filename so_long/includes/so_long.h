@@ -46,5 +46,5 @@ void    init_game(t_game *game);
 void    render_map(t_game *game);
 int handle_keypress(int keycode, t_game *game);
 int handle_exit(t_game *game);
-
+int validate_file(char *file);
 #endif

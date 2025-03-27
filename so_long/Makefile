@@ -9,6 +9,7 @@ SRCS = $(addprefix $(SRC_DIR), \
     map.c \
     game.c \
 	render.c \
+	validate.c \
     events.c)
 
 OBJS = $(SRCS:.c=.o)
