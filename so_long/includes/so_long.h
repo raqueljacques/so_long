@@ -4,10 +4,10 @@
 #include "../libraries/minilibx-linux/mlx.h"
 # include "../libraries/libft/libft.h"
 
-#include <fcntl.h>  // Para open()
-#include <stdlib.h> // Para malloc(), free()
-#include <unistd.h> // Para close(), read()
-#include <stdio.h>  // Para perror()
+#include <fcntl.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 
 # define CLOSE_WINDOW 17
 # define ESC	65307
@@ -19,7 +19,6 @@
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 600
 
-//TODO: Verificar se eu posso enfiar tudo na mesma struct
 typedef struct s_game
 {
     void    *mlx;
@@ -27,12 +26,12 @@ typedef struct s_game
     char    **map;
     int     width;
     int     height;
-    //TODO: renomear aonde é usado para collectibles_count
     int     collectibles;
     int     exit_count;
     int     player_count;
     int     player_x;
     int     player_y;
+    int moves;
     void    *floor_img;
     void    *wall_img;
     void    *player_img;
