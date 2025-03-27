@@ -16,23 +16,34 @@ static void count_elements(t_game *game, char c)
 }
 
 static void flood_fill(char **map, t_game *game, int x, int y, int *reachable_collectibles, int *reachable_exit) {
-    if (x < 0 || y < 0 || x >= game->height || y >= game->width || map[y][x] == '1' || map[y][x] == 'V')
+    // Verifica se estamos fora dos limites do mapa
+    if (y < 0 || x < 0 || y >= game->height || x >= game->width)
         return;
 
+    // Se encontramos uma parede ou já visitamos a célula, retornamos
+    if (map[y][x] == '1' || map[y][x] == 'V')
+        return;
+
+    // Se encontramos um coletável, aumentamos a contagem
     if (map[y][x] == 'C')
         (*reachable_collectibles)++;
-    if (map[y][x] == 'E')
-        (*reachable_exit)++;
 
-    // Marca a célula como visitada com 'V' para evitar loops
+    // Se encontramos a saída, marcamos que é acessível, mas **não sobrescrevemos**
+    if (map[y][x] == 'E') {
+        (*reachable_exit)++;
+        return; // Não podemos marcar 'E' como visitado!
+    }
+
+    // Marca a célula como visitada
     map[y][x] = 'V';
 
-    // Chama recursivamente para as 4 direções
+    // Chama recursivamente para as 4 direções (cima, baixo, esquerda, direita)
     flood_fill(map, game, x + 1, y, reachable_collectibles, reachable_exit);
     flood_fill(map, game, x - 1, y, reachable_collectibles, reachable_exit);
     flood_fill(map, game, x, y + 1, reachable_collectibles, reachable_exit);
     flood_fill(map, game, x, y - 1, reachable_collectibles, reachable_exit);
 }
+
 
 
 static char **copy_map(char **map, int height) {
@@ -151,7 +162,7 @@ static void	define_width(t_game *game, char *line)
 		game->width = len;
 	return;
 }
-
+/*
 //Recebe como parâmetro o mapa e a struct que vai receber as informações
 char	**load_map(char *file, t_game *game)
 {
@@ -166,6 +177,7 @@ char	**load_map(char *file, t_game *game)
 	game->exit_count = 0;
 	game->player_count = 0;
 
+    ft_printf("chegou aqui");
 	while((line = get_next_line(fd)))
 	{
 		int	i;
@@ -174,12 +186,10 @@ char	**load_map(char *file, t_game *game)
 		if (!game->width)
 			define_width(game, line);
 
-		//garante o espaço para alocar a primeira linha 
 		game->map = realloc(game->map, sizeof(char *) * (game->height + 2));
-		//armazena na posição height a linha
 		game->map[game->height] = line;
 		while (i < game->width)
-		{
+		{       
 			if (!check_valid_char(line[i]))
 				return (ft_printf("Error: Map contains invalid characters.\n"), NULL);
 			count_elements(game, line[i]);
@@ -187,6 +197,7 @@ char	**load_map(char *file, t_game *game)
 		}
 		game->height++;
 	}
+    ft_printf("opa");
 	game->map[game->height] = NULL;
 	close(fd);
 
@@ -194,4 +205,77 @@ char	**load_map(char *file, t_game *game)
 		return game->map;
 	else
 		return NULL;
+}*/
+
+char	**load_map(char *file, t_game *game)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error opening the file"), NULL);
+
+	// 1. Contar a altura do mapa antes de alocar memória
+	game->height = 0;
+	while ((line = get_next_line(fd)))
+	{
+		free(line);
+		game->height++;
+	}
+	close(fd);
+
+	// 2. Se o mapa estiver vazio, erro
+	if (game->height == 0)
+		return (ft_printf("Error: Empty map.\n"), NULL);
+
+	// 3. Alocar memória para o mapa
+	game->map = malloc(sizeof(char *) * (game->height + 1));
+	if (!game->map)
+		return (ft_printf("Error: Memory allocation failed.\n"), NULL);
+
+	// 4. Reabrir o arquivo para carregar os dados
+	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		return (perror("Error reopening the file"), NULL);
+
+	// 5. Inicializar variáveis do jogo
+	game->width = 0;
+	game->collectibles = 0;
+	game->exit_count = 0;
+	game->player_count = 0;
+
+	// 6. Ler o mapa e armazenar as linhas
+	i = 0;
+	while (i < game->height && (line = get_next_line(fd)))
+	{
+		if (!game->width)
+			define_width(game, line);
+
+		game->map[i] = line;
+
+		// Validar caracteres e contar elementos
+		int j = 0;
+		while (j < game->width)
+		{
+			if (!check_valid_char(line[j]))
+            {
+                free_map(game->map, i);
+				return (ft_printf("Error: Invalid character in map.\n"), NULL);
+            }
+            count_elements(game, line[j]);
+			j++;
+		}
+
+		i++;
+	}
+	game->map[game->height] = NULL; // Finalizar matriz
+	close(fd);
+
+	// 7. Validar o mapa antes de retornar
+	if (validate_map(game))
+		return (game->map);
+	else
+		return (NULL);
 }
