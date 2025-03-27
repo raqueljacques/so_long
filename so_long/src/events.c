@@ -21,6 +21,9 @@ static void move_player(t_game *game, int new_x, int new_y) {
 		free_map(game->map, game->height);
         mlx_destroy_window(game->mlx, game->win);
         exit(0);
+    } else if (game->map[new_y][new_x] == 'E')
+    {
+        return;
     }
 
     // Atualiza a posição do jogador no mapa
