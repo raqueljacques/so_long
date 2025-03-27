@@ -40,12 +40,28 @@ typedef struct s_game
     void    *exit_img;
 } t_game;
 
-char    **load_map(char *file, t_game *game);
-void    free_map(char **map, int height);
+int validate_file(char *file);
+
 void    destroy_all(t_game *game);
-void    init_game(t_game *game);
-void    render_map(t_game *game);
+void    free_map(char **map, int height);
+
 int handle_keypress(int keycode, t_game *game);
 int handle_exit(t_game *game);
+
+void	fill_map(int fd, t_game *game);
+
+void    init_game(t_game *game);
+
+char    **load_map(char *file, t_game *game);
+
+void    render_map(t_game *game);
+
+char **copy_map(char **map, int height);
+
+void	initialize_game_vars(t_game *game);
+void find_player_position(t_game *game);
+
+int validate_map(t_game *game);
+int validade_char(char c);
 int validate_file(char *file);
 #endif

@@ -5,12 +5,15 @@ FLAGS = -Wall -Wextra -Werror -I./includes -I./libraries/minilibx-linux -I./libr
 SRC_DIR = ./src/
 
 SRCS = $(addprefix $(SRC_DIR), \
-    so_long.c \
-    map.c \
+	clear.c \
+	events.c \
+	fill_map_utils.c \
     game.c \
+    map.c \
 	render.c \
+    so_long.c \
 	utils.c \
-    events.c)
+	validate.c)
 
 OBJS = $(SRCS:.c=.o)
 
