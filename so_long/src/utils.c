@@ -52,3 +52,23 @@ char **copy_map(char **map, int height) {
     new_map[height] = NULL;
     return new_map;
 }
+
+int has_border_filled(t_game *game) {
+    int i;
+
+    i = 0;
+    while (i < game->width)
+    {
+        if (game->map[0][i] != '1' || game->map[game->height - 1][i] != '1')
+            return(0);
+        i++;
+    }
+    i = 0;
+    while (i < game->height)
+    {
+        if (game->map[i][0] != '1' || game->map[i][game->width -1] != '1')
+            return(0);
+        i++;
+    }
+    return(1);
+}

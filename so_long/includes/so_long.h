@@ -64,4 +64,5 @@ void find_player_position(t_game *game);
 int validate_map(t_game *game);
 int validade_char(char c);
 int validate_file(char *file);
+int has_border_filled(t_game *game);
 #endif
