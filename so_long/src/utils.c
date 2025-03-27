@@ -27,6 +27,7 @@ void	initialize_game_vars(t_game *game)
 	game->collectibles = 0;
 	game->exit_count = 0;
 	game->player_count = 0;
+    game->moves = 0;
 }
 
 char **copy_map(char **map, int height) {

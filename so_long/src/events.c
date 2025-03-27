@@ -1,5 +1,11 @@
 #include "../includes/so_long.h"
 
+static void    print_moves(t_game *game)
+{
+    game->moves++;
+    ft_putnbr(game->moves);
+    ft_printf("\n");
+}
 
 static void move_player(t_game *game, int new_x, int new_y) {
     if (game->map[new_y][new_x] == '1')
@@ -9,8 +15,8 @@ static void move_player(t_game *game, int new_x, int new_y) {
     if (game->map[new_y][new_x] == 'C') {
         game->collectibles--;
     }
-
     if (game->map[new_y][new_x] == 'E' && game->collectibles == 0) {
+        print_moves(game);
         printf("Congratulations! You won the game!\n");
         destroy_all(game);
         return;
@@ -23,6 +29,7 @@ static void move_player(t_game *game, int new_x, int new_y) {
     game->map[new_y][new_x] = 'P';
     game->player_x = new_x;
     game->player_y = new_y;
+    print_moves(game);
     render_map(game);
 }
 
