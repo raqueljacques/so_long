@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 23:27:50 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/03/27 01:19:33 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/03/27 01:23:01 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_game(t_game *game) {
 	game->collectible_img = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm", &sprite_width, &sprite_height);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "assets/exit.xpm", &sprite_width, &sprite_height);
 	if (!game->floor_img || !game->wall_img || !game->player_img || !game->collectible_img || !game->exit_img)
-		exit(printf("Erro: Não foi possível carregar os sprites!\n"));
+		exit(printf("Erro: Unable to load sprites!!\n"));
     //TODO: Caso decida contabilizar os movimentos
     //game->moves = 0;
 }
