@@ -42,6 +42,7 @@ typedef struct s_game
 
 char    **load_map(char *file, t_game *game);
 void    free_map(char **map, int height);
+void    destroy_all(t_game *game);
 void    init_game(t_game *game);
 void    render_map(t_game *game);
 int handle_keypress(int keycode, t_game *game);

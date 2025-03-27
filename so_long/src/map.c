@@ -94,23 +94,6 @@ static void find_player_position(t_game *game) {
     exit(1); // Finaliza o programa caso o jogador não seja encontrado
 }
 
-void free_map(char **map, int height) {
-    int i;
-
-    i = 0;
-    if (!map)
-        return;
-
-    while (i < height)
-    {
-        if (map[i]) {
-            free(map[i]);
-        }
-        i++;
-    }
-    free(map);
-}
-
 static int is_map_playable(t_game *game) {
     int reachable_collectibles = 0;
     int reachable_exit = 0;
