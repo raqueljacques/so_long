@@ -44,6 +44,7 @@ SRCS=ft_bzero.c \
      ft_putnbr_u.c\
      get_next_line.c\
      ft_putnbr.c\
+     ft_strjoin_free.c
 
 OBJS = $(SRCS:.c=.o)
 

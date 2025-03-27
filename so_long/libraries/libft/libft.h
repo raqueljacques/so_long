@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdos-san <rdos-san@student.42.rio>         +#+  +:+       +#+        */
+/*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:01:19 by rdos-san          #+#    #+#             */
-/*   Updated: 2024/09/20 17:00:59 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/03/27 01:07:34 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 //TODO: Como vai ser definido o buffer size para usp na so long?
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 10000000
 # endif
 
 # include <stdlib.h>
@@ -79,5 +79,6 @@ int			ft_putnbr(int nb);
 //gnl
 
 char		*get_next_line(int fd);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 #endif

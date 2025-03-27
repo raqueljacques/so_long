@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdos-san <rdos-san@student.42.rio>         +#+  +:+       +#+        */
+/*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:59:02 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/01/24 16:59:06 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/03/27 01:06:28 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static char	*read_fd(int fd, char *backup)
 		if (read_bytes < 0)
 			return (handle_read_error(backup, buffer));
 		buffer[read_bytes] = '\0';
-		backup = ft_strjoin(backup, buffer);
+		backup = ft_strjoin_free(backup, buffer);
 	}
 	free(buffer);
 	return (backup);
@@ -105,5 +105,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	line = get_line(backup);
 	backup = remove_read_line(backup);
+	free(backup);
 	return (line);
 }
