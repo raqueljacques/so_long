@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   so_long.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rdos-san <rdos-san@student.42.rio>         +#+  +:+       +#+        */
+/*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 23:20:35 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/03/26 23:22:18 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/03/27 08:13:19 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
+	ft_bzero(&game, sizeof(t_game));
 
 	if (argc != 2)
 		exit(printf("Error: invalid number of arguments\n"));

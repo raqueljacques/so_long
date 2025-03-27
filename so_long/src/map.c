@@ -47,14 +47,13 @@ static void malloc_map(char *file, t_game *game)
 	initialize_game_vars(game);
 	fill_map(fd, game);
 	close(fd);
-	ft_printf("malloc_map\n");
 }
 char **load_map(char *file, t_game *game)
 {
-	ft_printf("load_map\n");
 	define_height(file, game);
 	if (game->height == 0)
 		return (NULL);
+	game->map = NULL;
 	malloc_map(file, game);
 	if (!game->map)
 		return (NULL);
