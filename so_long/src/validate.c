@@ -18,13 +18,29 @@ int validade_char(char c)
 int validate_map(t_game *game)
 {
     if (game->player_count != 1)
-        return (printf("Error: Map must have exactly 1 player!\n"), 0);
+    {
+        destroy_all(game);
+        perror("Error: Map must have exactly 1 player!\n");
+        return(0);
+    }
     if (game->exit_count != 1)
-        return (printf("Error: Map must have exactly 1 exit!\n"), 0);
+    {
+        destroy_all(game);
+        perror("Error: Map must have exactly 1 exit!\n");
+        return(0);
+    }
     if (game->collectibles < 1)
-        return (printf("Error: Map must have at least 1 collectible!\n"), 0);
+    {
+        destroy_all(game);
+        perror("Error: Map must have at least 1 collectible!\n");
+        return(0);
+    }
 	if (!is_map_playable(game))
-		return (printf("Error: Map needs to be playable!\n"), 0);
+    {
+        destroy_all(game);
+        perror("Error: Map needs to be playable!\n");
+		return(0);
+    }
     return (1);
 }
 
