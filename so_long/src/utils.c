@@ -1,42 +1,54 @@
 #include "../includes/so_long.h"
 
-int validate_file(char *file)
-{
-    char *extension = ft_strrchr(file, '.');
-    if (!extension || ft_strcmp(extension, ".ber") != 0)
-    {
-        return (0);
+void find_player_position(t_game *game) {
+    int x;
+	int y;
+
+	x = 0;
+    y = 0;
+    while (y < game->height) {
+        x = 0;
+        while (x < game->width) {
+            if (game->map[y][x] == 'P') {
+                game->player_x = x;
+                game->player_y = y;
+                return;
+            }
+            x++;
+        }
+        y++;
     }
-    return (1);
+    exit(printf("Error: Player's starting position not found\n"));
 }
 
-void    destroy_all(t_game *game)
+void	initialize_game_vars(t_game *game)
 {
-    free_map(game->map, game->height);
-    mlx_destroy_image(game->mlx, game->wall_img);
-    mlx_destroy_image(game->mlx, game->floor_img);
-    mlx_destroy_image(game->mlx, game->collectible_img);
-    mlx_destroy_image(game->mlx, game->exit_img);
-    mlx_destroy_image(game->mlx, game->player_img);
-    mlx_destroy_display(game->mlx);
-    mlx_destroy_window(game->mlx, game->win);
-    free(game->mlx);
-    exit(0);
+	game->width = 0;
+	game->collectibles = 0;
+	game->exit_count = 0;
+	game->player_count = 0;
 }
 
-void free_map(char **map, int height) {
+char **copy_map(char **map, int height) {
+    char **new_map = malloc(sizeof(char *) * (height + 1));
+    if (!new_map) {
+        perror("Error allocating memory for map copy");
+        exit(EXIT_FAILURE);
+    }
     int i;
 
     i = 0;
-    if (!map)
-        return;
-
     while (i < height)
     {
-        if (map[i]) {
-            free(map[i]);
+        new_map[i] = ft_strdup(map[i]);
+        if (!new_map[i]) {
+            while (--i >= 0)
+                free(new_map[i]);
+            free(new_map);
+            return NULL;
         }
         i++;
     }
-    free(map);
+    new_map[height] = NULL;
+    return new_map;
 }
