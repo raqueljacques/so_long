@@ -11,16 +11,16 @@ void render_map(t_game *game) {
         while(x < game->width)
         {
             if (game->map[y][x] == '1')
-                mlx_put_image_to_window(game->mlx, game->win, game->wall_img, x * 32, y * 32);
+                mlx_put_image_to_window(game->mlx, game->win, game->wall_img, x * SPRITE_SIZE, y * SPRITE_SIZE);
             else if (game->map[y][x] == '0')
-                mlx_put_image_to_window(game->mlx, game->win, game->floor_img, x * 32, y * 32);
+                mlx_put_image_to_window(game->mlx, game->win, game->floor_img, x * SPRITE_SIZE, y * SPRITE_SIZE);
             else if (game->map[y][x] == 'C')
-                mlx_put_image_to_window(game->mlx, game->win, game->collectible_img, x * 32, y * 32);
+                mlx_put_image_to_window(game->mlx, game->win, game->collectible_img, x * SPRITE_SIZE, y * SPRITE_SIZE);
             else if (game->map[y][x] == 'E')
-                mlx_put_image_to_window(game->mlx, game->win, game->exit_img, x * 32, y * 32);
+                mlx_put_image_to_window(game->mlx, game->win, game->exit_img, x * SPRITE_SIZE, y * SPRITE_SIZE);
             x++;
         }
         y++;
     }
-    mlx_put_image_to_window(game->mlx, game->win, game->player_img, game->player_x * 32, game->player_y * 32);
+    mlx_put_image_to_window(game->mlx, game->win, game->player_img, game->player_x * SPRITE_SIZE, game->player_y * SPRITE_SIZE);
 }

@@ -13,8 +13,8 @@ static void change_image(t_game *game, int new_x, int new_y)
     int	sprite_width;
 	int	sprite_height;
 
-    sprite_width = 32;
-	sprite_height = 32;
+    sprite_width = SPRITE_SIZE;
+	sprite_height = SPRITE_SIZE;
 
     if (game->player_x > new_x)
         game->player_img = mlx_xpm_file_to_image(game->mlx, "assets/player_left.xpm", &sprite_width, &sprite_height);
@@ -56,13 +56,13 @@ static void move_player(t_game *game, int new_x, int new_y) {
 int handle_keypress(int keycode, t_game *game) {
     if (keycode == ESC) {
         destroy_all(game);
-    } else if (keycode == KEY_W) {
+    } else if (keycode == KEY_W || keycode == KEY_UP) {
         move_player(game, game->player_x, game->player_y - 1); 
-    } else if (keycode == KEY_S) {
+    } else if (keycode == KEY_S || keycode == KEY_DOWN) {
         move_player(game, game->player_x, game->player_y + 1); 
-    } else if (keycode == KEY_A) {
+    } else if (keycode == KEY_A || keycode == KEY_LEFT) {
         move_player(game, game->player_x - 1, game->player_y);
-    } else if (keycode == KEY_D) {
+    } else if (keycode == KEY_D || keycode == KEY_RIGHT) {
         move_player(game, game->player_x + 1, game->player_y);
     }
     return 0;

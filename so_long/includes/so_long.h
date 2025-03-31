@@ -16,8 +16,12 @@
 # define KEY_S	115
 # define KEY_D	100
 
-#define WIN_WIDTH 800
-#define WIN_HEIGHT 600
+# define KEY_UP	65362
+# define KEY_DOWN	65364
+# define KEY_LEFT	65361
+# define KEY_RIGHT	65363
+
+#define SPRITE_SIZE 64
 
 typedef struct s_game
 {

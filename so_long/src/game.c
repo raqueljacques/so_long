@@ -16,14 +16,17 @@ void	init_game(t_game *game) {
 	game->mlx = mlx_init();
 	if (!game->mlx)
 		exit(printf("Error: Could not initialize MiniLibX!\n"));
-	game->win = mlx_new_window(game->mlx, game->width * 32, game->height * 32, "so_long");
+	game->win = mlx_new_window(game->mlx, game->width * SPRITE_SIZE, game->height * SPRITE_SIZE, "so_long");
 	if (!game->win)
 		exit(printf("Error: Could not create window!\n"));
+
+
 	int	sprite_width;
 	int	sprite_height;
 
-	sprite_width = 32;
-	sprite_height = 32;
+	sprite_width = SPRITE_SIZE;
+	sprite_height = SPRITE_SIZE;
+
 	game->floor_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &sprite_width, &sprite_height);
 	game->wall_img = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", &sprite_width, &sprite_height);
 	game->player_img = mlx_xpm_file_to_image(game->mlx, "assets/player_right.xpm", &sprite_width, &sprite_height);
