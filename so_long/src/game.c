@@ -26,7 +26,7 @@ void	init_game(t_game *game) {
 	sprite_height = 32;
 	game->floor_img = mlx_xpm_file_to_image(game->mlx, "assets/floor.xpm", &sprite_width, &sprite_height);
 	game->wall_img = mlx_xpm_file_to_image(game->mlx, "assets/wall.xpm", &sprite_width, &sprite_height);
-	game->player_img = mlx_xpm_file_to_image(game->mlx, "assets/player.xpm", &sprite_width, &sprite_height);
+	game->player_img = mlx_xpm_file_to_image(game->mlx, "assets/player_right.xpm", &sprite_width, &sprite_height);
 	game->collectible_img = mlx_xpm_file_to_image(game->mlx, "assets/collectible.xpm", &sprite_width, &sprite_height);
 	game->exit_img = mlx_xpm_file_to_image(game->mlx, "assets/exit.xpm", &sprite_width, &sprite_height);
 	if (!game->floor_img || !game->wall_img || !game->player_img || !game->collectible_img || !game->exit_img)
