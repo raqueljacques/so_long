@@ -33,6 +33,8 @@ static void move_player(t_game *game, int new_x, int new_y) {
     }
     if (game->map[new_y][new_x] == 'C') {
         game->collectibles--;
+        game->collected++;
+        game->map[new_y][new_x] = '0'; // Remove o coletável do mapa
     }
     if (game->map[new_y][new_x] == 'E' && game->collectibles == 0) {
         print_moves(game);

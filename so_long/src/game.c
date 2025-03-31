@@ -20,6 +20,7 @@ void	init_game(t_game *game) {
 	if (!game->win)
 		exit(printf("Error: Could not create window!\n"));
 
+	count_collectibles(game);
 
 	int	sprite_width;
 	int	sprite_height;
@@ -36,4 +37,24 @@ void	init_game(t_game *game) {
 		exit(printf("Erro: Unable to load sprites!!\n"));
     //TODO: Contabilizar os movimentos
     //game->moves = 0;
+}
+
+void count_collectibles(t_game *game)
+{
+    int x, y;
+
+    game->collectibles = 0;
+    game->collected = 0;
+    y = 0;
+    while (game->map[y])
+    {
+        x = 0;
+        while (game->map[y][x])
+        {
+            if (game->map[y][x] == 'C')
+                game->collectibles++;
+            x++;
+        }
+        y++;
+    }
 }

@@ -31,6 +31,7 @@ typedef struct s_game
     int     width;
     int     height;
     int     collectibles;
+    int collected;
     int     exit_count;
     int     player_count;
     int     player_x;
