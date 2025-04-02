@@ -1,4 +1,4 @@
-NAME = solong
+NAME = so_long
 
 FLAGS = -Wall -Wextra -Werror -I./includes -I./libraries/minilibx-linux -I./libraries/libft -L./libraries/minilibx-linux -L./libraries/libft -lmlx_Linux -lXext -lX11 -lm -lz
 
