@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 21:24:00 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/04/01 21:24:01 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/04/01 23:25:53 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ int			validate_map(t_game *game);
 int			validade_char(char c);
 int			validate_file(char *file);
 int			has_border_filled(t_game *game);
+void		map_error(t_game *game, char *message);
 #endif
