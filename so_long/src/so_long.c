@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/26 23:20:35 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/03/27 08:13:19 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/04/01 20:28:40 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char **argv)
 {
 	t_game	game;
-	ft_bzero(&game, sizeof(t_game));
 
+	ft_bzero(&game, sizeof(t_game));
 	if (argc != 2)
 		exit(printf("Error: invalid number of arguments\n"));
 	if (!validate_file(argv[1]) || !load_map(argv[1], &game))
