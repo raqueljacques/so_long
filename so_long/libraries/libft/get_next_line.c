@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 16:59:02 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/03/27 07:35:35 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/04/01 21:22:56 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,6 @@ static char	*get_line(char *backup)
 		line[size++] = '\n';
 	line[size] = '\0';
 	return (line);
-}
-
-static char	*handle_read_error(char *backup, char *buffer)
-{
-	free(backup);
-	free(buffer);
-	return (NULL);
 }
 
 static char	*read_fd(int fd, char *backup)
@@ -64,48 +57,43 @@ static char	*read_fd(int fd, char *backup)
 	return (backup);
 }
 
-static size_t find_newline_position(char *backup)
+static char	*allocate_new_backup(char *backup, size_t start)
 {
-    size_t i = 0;
-    while (backup[i] && backup[i] != '\n')
-        i++;
-    return i;
+	size_t	j;
+	char	*new_backup;
+
+	j = 0;
+	new_backup = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
+	if (!new_backup)
+		return (NULL);
+	while (backup[start])
+		new_backup[j++] = backup[start++];
+	new_backup[j] = '\0';
+	return (new_backup);
 }
 
-static char *allocate_new_backup(char *backup, size_t start)
+static char	*remove_read_line(char *backup)
 {
-    size_t j = 0;
-    char *new_backup = malloc(sizeof(char) * (ft_strlen(backup) - start + 1));
-    if (!new_backup)
-        return (NULL);
-    while (backup[start])
-        new_backup[j++] = backup[start++];
-    new_backup[j] = '\0';
-    return new_backup;
-}
+	size_t	i;
+	char	*new_backup;
 
-static char *remove_read_line(char *backup)
-{
-    size_t i;
-    char *new_backup;
-
-    if (!backup)
-        return (NULL);
-    i = find_newline_position(backup);
-    if (!backup[i])
-    {
-        free(backup);
-        return (NULL);
-    }
-    i++;
-    if (!backup[i])
-    {
-        free(backup);
-        return (NULL);
-    }
-    new_backup = allocate_new_backup(backup, i);
-    free(backup);
-    return (new_backup);
+	if (!backup)
+		return (NULL);
+	i = find_newline_position(backup);
+	if (!backup[i])
+	{
+		free(backup);
+		return (NULL);
+	}
+	i++;
+	if (!backup[i])
+	{
+		free(backup);
+		return (NULL);
+	}
+	new_backup = allocate_new_backup(backup, i);
+	free(backup);
+	return (new_backup);
 }
 
 char	*get_next_line(int fd)
