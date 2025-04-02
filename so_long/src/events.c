@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/01 19:56:19 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/04/01 20:08:44 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/04/02 00:20:04 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ static void	change_image(t_game *game, int new_x, int new_y)
 
 	sprite_width = SPRITE_SIZE;
 	sprite_height = SPRITE_SIZE;
+	if (game->player_img)
+		mlx_destroy_image(game->mlx, game->player_img);
 	if (game->player_x > new_x)
 		game->player_img = mlx_xpm_file_to_image(game->mlx,
 				"assets/player_left.xpm", &sprite_width, &sprite_height);
