@@ -6,7 +6,7 @@
 /*   By: rdos-san <rdos-san@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/17 17:01:19 by rdos-san          #+#    #+#             */
-/*   Updated: 2025/04/01 21:39:47 by rdos-san         ###   ########.fr       */
+/*   Updated: 2025/04/02 00:24:41 by rdos-san         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define LIBFT_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10000000
 # endif
 
 # include <stdarg.h>
